@@ -13,25 +13,50 @@ namespace SimpleUserAgent;
 class UserAgent
 {
     protected $agent;
-    protected $platform;
+    protected $os;
     protected $browser;
     protected $prefix;
     protected $version;
+    protected $engine;
+    protected $device = 'Desktop';
+    protected $isBot = false;
 
-    protected $platforms = [
+    protected $oss = [
         'Android' => ['Android'],
         'Linux' => ['linux'],
-        'iPhone' => ['iPhone'],
-        'Macintosh' => ['macintosh', 'mac os x'],
+        'Macintosh' => ['Macintosh', 'Mac OS X'],
+        'iOS' => ['like Mac OS X'],
         'Windows' => ['windows', 'win32'],
     ];
     protected $browsers = [
+        'Edge' => ['Edge'],
         'Internet Explorer' => ['MSIE'],
         'Mozilla Firefox' => ['Firefox'],
         'Google Chrome' => ['Chrome'],
         'Apple Safari' => ['Safari'],
         'Opera' => ['Opera'],
         'Netscape' => ['Netscape'],
+    ];
+    protected $engines = [
+        'Gecko' => ['Gecko'],
+        'Blink' => ['AppleWebKit'],
+        'WebKit' => ['X) AppleWebKit'],
+        'EdgeHTML' => ['Edge'],
+        'Trident' => ['Trident', 'MSIE'],
+    ];
+    protected $devices = [
+        'iPad' => ['iPad'],
+        'iPhone' => ['iPhone'],
+        'Samsung' => ['SAMSUNG'],
+        'HTC' => ['HTC'],
+    ];
+    protected $bots = [
+        'Baidu' => ['Baidu'],
+        'BingBot' => ['bingbot'],
+        'DuckDuckGo' => ['DuckDuckBot'],
+        'Googlebot' => ['Googlebot'],
+        'Yahoo!' => ['Slurp'],
+        'Yandex' => ['Yandex'],
     ];
 
     public function __construct($agent = null)
@@ -47,11 +72,11 @@ class UserAgent
 
     public function parse()
     {
-        // Find plartform
-        foreach ($this->platforms as $platform => $patterns) {
+        // Find OS
+        foreach ($this->oss as $os => $patterns) {
             foreach ($patterns as $pattern) {
                 if (strpos($this->agent, $pattern) !== false) {
-                    $this->platform = $platform;
+                    $this->os = $os;
                     break;
                 }
             }
@@ -68,6 +93,26 @@ class UserAgent
             }
         }
 
+        // Engine
+        foreach ($this->engines as $engine => $patterns) {
+            foreach ($patterns as $pattern) {
+                if (strpos($this->agent, $pattern) !== false) {
+                    $this->engine = $engine;
+                    break;
+                }
+            }
+        }
+
+        // Device
+        foreach ($this->devices as $device => $patterns) {
+            foreach ($patterns as $pattern) {
+                if (strpos($this->agent, $pattern) !== false) {
+                    $this->device = $device;
+                    break;
+                }
+            }
+        }
+
         // Browser version
         $pattern = '#(?<browser>' . join('|', ['Version', $this->prefix, 'other']) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
         preg_match_all($pattern, $this->agent, $matches);
@@ -77,6 +122,16 @@ class UserAgent
         if (count($matches['browser']) != 1) {
             $this->version = strripos($this->agent, "Version") < strripos($this->agent, $this->prefix) ? $matches['version'][0] : $matches['version'][1];
         }
+
+        // Check if is a BOT
+        foreach ($this->bots as $bot => $patterns) {
+            foreach ($patterns as $pattern) {
+                if (strpos($this->agent, $pattern) !== false) {
+                    $this->isBot = true;
+                    break;
+                }
+            }
+        }
     }
 
     public function setAgent($agent)
@@ -85,15 +140,33 @@ class UserAgent
         $this->parse();
     }
 
+    public function isBot()
+    {
+        return $this->isBot;
+    }
+
     public function getInfo()
     {
         return [
             'agent' => $this->getAgent(),
-            'platform' => $this->getPlatform(),
+            'device' => $this->getDevice(),
+            'os' => $this->getOS(),
             'browser' => $this->getBrowser(),
+            'engine' => $this->getEngine(),
             'prefix' => $this->getPrefix(),
             'version' => $this->getVersion(),
+            'is_bot' => $this->isBot() ? 'true' : 'false',
         ];
+    }
+
+    public function getDevice()
+    {
+        return $this->device;
+    }
+
+    public function getEngine()
+    {
+        return $this->engine;
     }
 
     public function getAgent()
@@ -101,9 +174,9 @@ class UserAgent
         return $this->agent;
     }
 
-    public function getPlatform()
+    public function getOS()
     {
-        return $this->platform;
+        return $this->os;
     }
 
     public function getBrowser()
