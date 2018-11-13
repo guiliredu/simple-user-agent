@@ -29,9 +29,16 @@ To get the data, you can call these available methods
 
 ```php
 $this->getAgent() // Full user agent string
-$this->getPlatform() // iPhone
+$this->getDevice() // iPhone
+$this->getOS() // iOS
 $this->getBrowser() // Apple Safari
 $this->getPrefix() // Safari
 $this->getVersion() // 11.0
+$this->getEngine() // WebKit
+$this->isBot() // true / false
 $this->getInfo() // Array with all the above info
 ```
+
+---
+
+This project is under development - For test purposes only
