@@ -2,7 +2,7 @@
     "name": "guiliredu/simple-user-agent",
     "description": "A package to get info from a user agent",
     "type": "library",
-    "license": "New BSD License",
+    "license": "MIT License",
     "authors": [
         {
             "name": "Guilherme Dias Redü",
