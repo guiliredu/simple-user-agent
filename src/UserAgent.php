@@ -36,6 +36,8 @@ class UserAgent
         'Apple Safari' => ['Safari'],
         'Opera' => ['Opera'],
         'Netscape' => ['Netscape'],
+        'cURL' => ['curl'],
+        'Wget' => ['Wget'],
     ];
     protected $engines = [
         'Gecko' => ['Gecko'],
