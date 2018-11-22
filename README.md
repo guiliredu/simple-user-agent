@@ -42,3 +42,10 @@ $this->getInfo() // Array with all the above info
 ---
 
 This project is under development - For test purposes only
+
+---
+
+References:
+
+- https://deviceatlas.com/blog/list-of-user-agent-strings
+- https://developers.whatismybrowser.com/useragents/explore/

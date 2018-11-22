@@ -8,7 +8,7 @@
 namespace SimpleUserAgent;
 
 /**
- * Simple PHP FTP class
+ * Simple PHP User Agent class
  */
 class UserAgent
 {
@@ -23,18 +23,20 @@ class UserAgent
 
     protected $oss = [
         'Android' => ['Android'],
-        'Linux' => ['linux'],
-        'Macintosh' => ['Macintosh', 'Mac OS X'],
+        'Linux' => ['linux', 'Linux'],
+        'Mac OS X' => ['Macintosh', 'Mac OS X'],
         'iOS' => ['like Mac OS X'],
-        'Windows' => ['windows', 'win32'],
+        'Windows' => ['Windows NT', 'win32'],
+        'Windows Phone' => ['Windows Phone'],
+        'Chrome OS' => ['CrOS'],
     ];
     protected $browsers = [
+        'Apple Safari' => ['Safari'],
+        'Google Chrome' => ['Chrome'],
         'Edge' => ['Edge'],
         'Internet Explorer' => ['MSIE'],
         'Mozilla Firefox' => ['Firefox'],
-        'Google Chrome' => ['Chrome'],
-        'Apple Safari' => ['Safari'],
-        'Opera' => ['Opera'],
+        'Opera' => ['OPR', 'Opera'],
         'Netscape' => ['Netscape'],
         'cURL' => ['curl'],
         'Wget' => ['Wget'],
@@ -49,7 +51,20 @@ class UserAgent
     protected $devices = [
         'iPad' => ['iPad'],
         'iPhone' => ['iPhone'],
-        'Samsung' => ['SAMSUNG'],
+        'Samsung' => ['SAMSUNG', 'SM-G'],
+        'HTC' => ['HTC'],
+        'Sony Xperia' => ['G8231', 'E6653'],
+        'Amazon Kindle' => ['Kindle'],
+        'Nintendo 3DS' => ['Nintendo 3DS'],
+        'Nintendo Wii U' => ['Nintendo WiiU'],
+        'Playstation Vita' => ['Playstation Vita'],
+        'Playstation 4' => ['Playstation 4'],
+        'Xbox One' => ['Xbox One'],
+        'Xbox One S' => ['XBOX_ONE_ED'],
+        'Apple TV' => ['AppleTV'],
+        'Google Nexus Player' => ['Nexus Player'],
+        'Amazon Fire TV' => ['AFTS'],
+        'Chromecast' => ['CrKey'],
         'HTC' => ['HTC'],
     ];
     protected $bots = [
@@ -130,6 +145,7 @@ class UserAgent
             foreach ($patterns as $pattern) {
                 if (strpos($this->agent, $pattern) !== false) {
                     $this->isBot = true;
+                    $this->device = 'BOT';
                     break;
                 }
             }
