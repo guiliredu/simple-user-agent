@@ -28,15 +28,15 @@ $agent->setAgent('Mozilla/5.0 ...');
 To get the data, you can call these available methods
 
 ```php
-$this->getAgent() // Full user agent string
-$this->getDevice() // iPhone
-$this->getOS() // iOS
-$this->getBrowser() // Apple Safari
-$this->getPrefix() // Safari
-$this->getVersion() // 11.0
-$this->getEngine() // WebKit
-$this->isBot() // true / false
-$this->getInfo() // Array with all the above info
+$agent->getAgent() // Full user agent string
+$agent->getDevice() // iPhone
+$agent->getOS() // iOS
+$agent->getBrowser() // Apple Safari
+$agent->getPrefix() // Safari
+$agent->getVersion() // 11.0
+$agent->getEngine() // WebKit
+$agent->isBot() // true / false
+$agent->getInfo() // Array with all the above info
 ```
 
 ---
