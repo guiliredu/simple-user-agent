@@ -17,5 +17,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^7"
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/UserAgentTest -vvv --testdox"
     }
+
 }
