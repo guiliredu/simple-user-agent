@@ -68,12 +68,18 @@ class UserAgent
         'HTC' => ['HTC'],
     ];
     protected $bots = [
-        'Baidu' => ['Baidu'],
-        'BingBot' => ['bingbot'],
+        'Baidu' => ['Baidu', 'Baiduspider'],
+        'BingBot' => ['bingbot', 'Bingbot'],
         'DuckDuckGo' => ['DuckDuckBot'],
         'Googlebot' => ['Googlebot'],
         'Yahoo!' => ['Slurp'],
-        'Yandex' => ['Yandex'],
+        'Yandex' => ['Yandex', 'YandexBot'],
+        'Telegram' => ['TelegramBot'],
+        'Twitter' => ['TwitterBot'],
+        'Sogou' => ['Sogou'],
+        'Exabot' => ['Exabot', 'Konqueror'],
+        'Facebook' => ['facebot', 'facebookexternalhit'],
+        'Alexa' => ['ia_archiver'],
     ];
 
     public function __construct($agent = null)
